@@ -62,10 +62,11 @@ up)
     R="${R}nameserver $NS"
   done
   #echo -n "$R" | $RESOLVCONF -x -p -a "${dev}"
-  echo -n "$R" | $RESOLVCONF -x -a "${dev}.inet"
+  echo "Adding nameserver $R for ${dev}"
+  echo -n "$R" | $RESOLVCONF -a "${dev}"
   ;;
 down)
-  $RESOLVCONF -d "${dev}.inet"
+  $RESOLVCONF -d "${dev}"
   ;;
 esac
 
