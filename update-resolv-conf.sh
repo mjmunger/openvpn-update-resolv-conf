@@ -24,6 +24,12 @@
 export PATH=$PATH:/sbin:/usr/sbin:/bin:/usr/bin
 RESOLVCONF=$(type -p resolvconf)
 
+#Added test for resolvconf. Michael Munger <michael@highpoweredhelp.com>
+if test -z $RESOLVCONF ; then
+  echo "resolvconf not found. Try apt install resolvconf"
+  exit 1;
+fi
+
 case $script_type in
 
 up)
@@ -48,13 +54,12 @@ up)
     for DS in $IF_DNS_SEARCH ; do
       R="${R} $DS"
     done
-  R="${R}
-"
+  R="${R}"
   fi
 
   for NS in $IF_DNS_NAMESERVERS ; do
-    R="${R}nameserver $NS
-"
+    #removed LF because it breaks v 2.4.4+
+    R="${R}nameserver $NS"
   done
   #echo -n "$R" | $RESOLVCONF -x -p -a "${dev}"
   echo -n "$R" | $RESOLVCONF -x -a "${dev}.inet"
