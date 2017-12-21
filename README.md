@@ -40,6 +40,10 @@ Alternatively, if you don't want to edit your client configuration, you can add 
 --setenv PATH '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin' --script-security 2 --up /etc/openvpn/update-resolv-conf.sh --down /etc/openvpn/update-resolv-conf.sh --down-pre
 ```
 
+### Modifications for Debian 9 + OpenVPN 2.4.4+
+
+As of OpenVPN version 2.4.4, having multiple DNS servers in the options no longer works. So, the LF has been removed. Additionally, under Debian, the ".inet" suffix to the adapter (i.e., tun0) fails. So, this has been removed.
+
 ### Support
 
 For bugs and another questions open a ticket in the [Isssues Page](https://github.com/masterkorp/openvpn-update-resolv-conf/issues).
